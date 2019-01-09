@@ -1,0 +1,1 @@
+<testsuite errors="0" failures="0" name="Django Project Tests" skips="0" tests="2" time="0.035"><testcase classname="product.tests.ProductTestCase" name="test_created_type" time="0.003041" /><testcase classname="product.tests.ProductTestCase" name="test_product_api_get_success" time="0.028067" /></testsuite>
