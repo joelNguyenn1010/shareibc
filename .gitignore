@@ -1,0 +1,15 @@
+.gitignore
+media
+shareibc-static
+report
+README.md
+carousel
+deploy
+.idea/workspace.xml
+env
+shareibc/env.py
+env.py
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
