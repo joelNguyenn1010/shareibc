@@ -60,7 +60,7 @@ STRIPE_SECRET_KEY = STRIPE_SECRET_KEY
 SECRET_KEY = '1^i-x8ym2i@nc0yd7rh+$u^h!9jhqg-413__u-_l60u43bj042'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # ALLOWED_HOSTS = ["django-env.py.6kfaxprdpp.ap-southeast-2.elasticbeanstalk.com"]
 ALLOWED_HOSTS = ["*"]
