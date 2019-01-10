@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.generics import CreateAPIView, RetrieveAPIView
 from rest_framework import permissions, status
-from django.core.mail import send_mail
+from django.core.mail import send_mail,mail_admins
 
 # Create your views here.
 from .serializers import RegisterSerializer, UserSupportSerializer, UpdateSerializer,RetrieveUserSerializer
@@ -29,7 +29,7 @@ def send_email(message, inquiry, email, name):
         '%s' % (message),
         '%s' % (email),
         ['nguyenngocanh590@gmail.com'],
-        fail_silently=False,
+        # fail_silently=False,
     )
 
 class AuthVerify(APIView):
