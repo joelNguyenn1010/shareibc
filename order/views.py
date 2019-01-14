@@ -48,22 +48,22 @@ def checkQtyOrder(orders):
 
 def send_email(to, chargeid, id):
     print("SENDING EMAIL")
-    # send_mail(
-    #     'Order receipt',
-    #     'Thanks for buying our product, your order id is %s-%s. This is automatic email, if there any issues, please contact our support' % (chargeid, id),
-    #     'nguyenngocanh590@gmail.com',
-    #     [to],
-    #     fail_silently=False,
-    # )
-    sg = sendgrid.SendGridAPIClient(apikey=SENDGRID)
-    from_email = Email("contact@shareibc.com")
-    to_email = Email(to)
-    subject = "Order receipt"
-    content = Content("text/plain", 'Thanks for buying our product, your order id is %s-%s. This is automatic email, if there any issues, please contact our support' % (chargeid, id))
-    mail = Mail(from_email, subject, to_email, content)
-    response = sg.client.mail.send.post(request_body=mail.get())
-    print(response.status_code)
-    print(response.body)
+    send_mail(
+        'Order receipt',
+        'Thanks for buying our product, your order id is %s-%s. This is automatic email, if there any issues, please contact our support' % (chargeid, id),
+        'nguyenngocanh590@gmail.com',
+        [to],
+        fail_silently=False,
+    )
+    # sg = sendgrid.SendGridAPIClient(apikey=SENDGRID)
+    # from_email = Email("contact@shareibc.com")
+    # to_email = Email(to)
+    # subject = "Order receipt"
+    # content = Content("text/plain", 'Thanks for buying our product, your order id is %s-%s. This is automatic email, if there any issues, please contact our support' % (chargeid, id))
+    # mail = Mail(from_email, subject, to_email, content)
+    # response = sg.client.mail.send.post(request_body=mail.get())
+    # print(response.status_code)
+    # print(response.body)
 
 class OrderCreateAPI(CreateAPIView):
     permission_classes = (permissions.AllowAny,)

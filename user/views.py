@@ -27,23 +27,23 @@ class RegisterAPIView(CreateAPIView):
 
 def send_email(message, inquiry, email, name):
     print("SENDING EMAIL")
-    sg = sendgrid.SendGridAPIClient(apikey=SENDGRID)
-    from_email = Email("contact@shareibc.com")
-    to_email = Email("contact@shareibc.com")
-    subject = "%s - %s - %s" % (inquiry, name, email)
-    print(message)
-    content = Content("text/plain", message)
-    mail = Mail(from_email, subject, to_email, content)
-    response = sg.client.mail.send.post(request_body=mail.get())
-    print(response.status_code)
-    print(response.body)
-    # send_mail(
-    #     '%s - %s - %s' % (inquiry, name, email),
-    #     '%s' % (message),
-    #     '%s' % (email),
-    #     ['nguyenngocanh590@gmail.com'],
-    #     # fail_silently=False,
-    # )
+    # sg = sendgrid.SendGridAPIClient(apikey=SENDGRID)
+    # from_email = Email("contact@shareibc.com")
+    # to_email = Email("contact@shareibc.com")
+    # subject = "%s - %s - %s" % (inquiry, name, email)
+    # print(message)
+    # content = Content("text/plain", message)
+    # mail = Mail(from_email, subject, to_email, content)
+    # response = sg.client.mail.send.post(request_body=mail.get())
+    # print(response.status_code)
+    # print(response.body)
+    send_mail(
+        '%s - %s - %s' % (inquiry, name, email),
+        '%s' % (message),
+        '%s' % (email),
+        ['nguyenngocanh590@gmail.com'],
+        # fail_silently=False,
+    )
 
 class AuthVerify(APIView):
     permission_classes = [permissions.IsAuthenticated]

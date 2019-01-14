@@ -19,8 +19,11 @@ from django.conf.urls import url
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
 #...
 from .views import AuthView, RegisterAPIView, UserSupport, UpdateUser, AuthVerify, UserAPI
+from django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
+    url('^', include('django.contrib.auth.urls')),
     url(r'^api-token-auth/', obtain_jwt_token),
     url('auth/create', RegisterAPIView.as_view()),
     url(r'^api-token-verify/', verify_jwt_token),

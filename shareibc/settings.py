@@ -36,15 +36,16 @@ AWS_LOCATION = 'static'
 
 
 
-
+SENDGRID_API_KEY = SENDGRID
 #for gmail
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS = False
-EMAIL_HOST = "smtpout.secureserver.net"
-EMAIL_HOST_USER = EMAIL_HOST_USER
-EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
+# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = SENDGIRD_HOST
+EMAIL_HOST_PASSWORD = SENDGRID_HOST_PASSWORD
 EMAIL_PORT = EMAIL_PORT
-SERVER_EMAIL = EMAIL_HOST_USER
+# SERVER_EMAIL = EMAIL_HOST_USER
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -93,6 +94,8 @@ INSTALLED_APPS = [
     'rest_framework_social_oauth2',
     'project',
     'storages',
+    # 'sendgrid',
+
 ]
 
 MIDDLEWARE = [
@@ -116,7 +119,7 @@ ROOT_URLCONF = 'shareibc.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, '../../templates')]
+        'DIRS': [os.path.join(BASE_DIR, 'templates')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -127,7 +130,6 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
         },
-
     },
 
 ]
