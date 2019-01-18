@@ -50,8 +50,8 @@ def send_email(to, chargeid, id):
     print("SENDING EMAIL")
     send_mail(
         'Order receipt',
-        'Thanks for buying our product, your order id is %s-%s. This is automatic email, if there any issues, please contact our support' % (chargeid, id),
-        'nguyenngocanh590@gmail.com',
+        'Thanks for buying our product, your order id is %s-%s. If there any issues, please contact our support' % (chargeid, id),
+        'contact@shareibc.com',
         [to],
         fail_silently=False,
     )

@@ -41,8 +41,8 @@ def send_email(message, inquiry, email, name):
         '%s - %s - %s' % (inquiry, name, email),
         '%s' % (message),
         '%s' % (email),
-        ['nguyenngocanh590@gmail.com'],
-        # fail_silently=False,
+        ['contact@shareibc.com'],
+        fail_silently=False,
     )
 
 class AuthVerify(APIView):
