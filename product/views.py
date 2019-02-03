@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from shareibc.pagination import CustomPagination
 # Create your views here.
 from .models import Product, City
-from .serializers import ProductSerializer, CitySerializer
+from .serializers import ProductSerializer, CitySerializer, ProductIndexSerializer
 # from shareibc.pagination import CustomPagination
 def filepath_images(domain, filename):
     return 'http://{domain}/media/background/{filename}'.format(domain=domain, filename=filename)
@@ -17,7 +17,7 @@ class ProductCity(ListAPIView):
 
 class ProductAPI(ListAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    serializer_class = ProductSerializer
+    serializer_class = ProductIndexSerializer
     pagination_class = CustomPagination
     search_fields = ('name','type__name')
     ordering_fields = ('name', 'price','value','type__name','quantity','city')
