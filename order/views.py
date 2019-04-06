@@ -29,7 +29,7 @@ def countTotalPrice(orders):
         total_price+=(k.first().get('price')*o.get('quantity'))
     return int(total_price*100)
 
-def changeQtyOrder(orders):
+def change_qty_Product_in_Order(orders):
     for o in orders:
         try:
             product = Product.objects.get(pk=o.get('products'))
@@ -38,7 +38,7 @@ def changeQtyOrder(orders):
         except:
             return Response(status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
 
-def checkQtyOrder(orders):
+def check_stock_product_in_order(orders):
     checking = True
     for o in orders:
         product = Product.objects.get(pk=o.get('products'))
@@ -50,20 +50,11 @@ def send_email(to, chargeid, id):
     print("SENDING EMAIL")
     send_mail(
         'Order receipt',
-        'Thanks for buying our product, your order id is %s-%s. If there any issues, please contact our support' % (chargeid, id),
+        'Thanks for buying our product, your order id is %s-%s. If there any issues, please contact our support.' % (chargeid, id),
         'contact@shareibc.com',
         [to],
         fail_silently=False,
     )
-    # sg = sendgrid.SendGridAPIClient(apikey=SENDGRID)
-    # from_email = Email("contact@shareibc.com")
-    # to_email = Email(to)
-    # subject = "Order receipt"
-    # content = Content("text/plain", 'Thanks for buying our product, your order id is %s-%s. This is automatic email, if there any issues, please contact our support' % (chargeid, id))
-    # mail = Mail(from_email, subject, to_email, content)
-    # response = sg.client.mail.send.post(request_body=mail.get())
-    # print(response.status_code)
-    # print(response.body)
 
 class OrderCreateAPI(CreateAPIView):
     permission_classes = (permissions.AllowAny,)
@@ -78,7 +69,7 @@ class OrderCreateAPI(CreateAPIView):
         token = request.data.pop('token')
         details = OrderDetailsSerializer(data=request.data)
         if details.is_valid():
-            if len(orders) > 0 and checkQtyOrder(orders):
+            if len(orders) > 0 and check_stock_product_in_order(orders):
                 try:
                     email = request.data['email']
                     charge = stripe.Charge.create(
@@ -88,11 +79,10 @@ class OrderCreateAPI(CreateAPIView):
                            description="The product charged to the user",
                            receipt_email=details.data.get('email')
                       )
-                    # print(charge)
                     orderDetail = self.create(request, *args, **kwargs)
                     new_order = OrderDetail.objects.get(id=orderDetail.data.get('id'))
                     Payment.objects.create(payment_ref=charge.get("id"), order=new_order)
-                    changeQtyOrder(orders)
+                    change_qty_Product_in_Order(orders)
                     user = request.user
                     print(user)
                     if request.user.is_authenticated:
