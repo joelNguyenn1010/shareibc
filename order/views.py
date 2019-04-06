@@ -112,12 +112,8 @@ class OrderAPI(ListAPIView):
     queryset = OrderDetail.objects.all()
 
     def get_queryset(self):
-        print(self.request.user)
-        #will return the user
-        # print(unicode(request.auth))
         user = User.objects.get(username=self.request.user)
         order = OrderDetail.objects.filter(user=user)
-        # print(order.order_set.all())
         return order
 
 
